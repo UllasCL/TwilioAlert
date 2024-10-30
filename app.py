@@ -1,7 +1,9 @@
-from flask import Flask, request
+from fastapi import FastAPI, Request
+from pydantic import BaseModel
 from twilio.rest import Client
+import os
 
-app = Flask(__name__)
+app = FastAPI()
 
 # Twilio credentials
 account_sid = 'your_account_sid'
@@ -12,11 +14,14 @@ twilio_client = Client(account_sid, auth_token)
 from_phone = '+your_twilio_number'
 to_phone = '+recipient_phone_number'
 
-@app.route('/alert', methods=['POST'])
-def alert():
-    data = request.get_json()
+# Request body model
+class AlertData(BaseModel):
+    title: str
+
+@app.post("/alert")
+async def alert(data: AlertData):
     # Parse Grafana alert data
-    alert_name = data.get('title')
+    alert_name = data.title
     message_body = f"Alert triggered: {alert_name}"
 
     # Make Twilio voice call
@@ -26,7 +31,4 @@ def alert():
         twiml=f"<Response><Say>{message_body}</Say></Response>"
     )
 
-    return "Voice call triggered", 200
-
-if __name__ == '__main__':
-    app.run(port=5000)
+    return {"message": "Voice call triggered"}
