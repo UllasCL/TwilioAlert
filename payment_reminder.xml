@@ -1,5 +1,5 @@
 <Response>
-    <Speak>
+    <Speak voice="Polly.Aditi">
         Hello! This is a reminder that your payment is due soon. 
         Please pay on time to avoid penalties.
     </Speak>
