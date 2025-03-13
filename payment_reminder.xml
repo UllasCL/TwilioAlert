@@ -1,6 +1,5 @@
 <Response>
-    <Speak voice="Polly.Aditi">
-        Hello! This is a reminder that your payment is due soon. 
-        Please pay on time to avoid penalties.
+    <Speak voice="Polly.Amit">
+        Nuclei bill for Azure Software for the amount of 2,000 rupees has been generated. Kindly head over to the platform to complete the payment at the earliest. You can also check your email for the payment link.
     </Speak>
 </Response>
